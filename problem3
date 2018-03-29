@@ -1,0 +1,31 @@
+import java.io.*;
+
+class problem3 {
+	public static void main (String[] args) {
+		System.out.println(phoneNumberNormalizer("+1(804)902192*09202"));
+		
+	}
+	
+	static String phoneNumberNormalizer(String num){
+	    String res = "";
+	    
+	    try{
+	       if(num.length()<7) res = num;
+	       else{
+	        num = num.replaceAll("[\\s\\-+()?* ]", "");
+	        
+	        if (num.substring(0,1).equalsIgnoreCase("0")){
+	           res = "62" + num.substring(1);
+	        }
+	        else
+	            res = num;
+	        
+	       }
+	    }
+	    catch(NullPointerException e){
+	        res = null;
+	    }
+	    
+	   return res;
+	}
+}

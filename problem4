@@ -1,0 +1,94 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class problem4 {
+	public static void main (String[] args) {
+	    ArrayList<Passanger> passangerList = new ArrayList<Passanger>();
+	    Passanger p1 = new Passanger("p1",1,5);
+	    Passanger p2 = new Passanger("p2",2,3);
+	    Passanger p3 = new Passanger("p3",2,4);
+	    Passanger p4 = new Passanger("p4",3,4);
+	    Passanger p5 = new Passanger("p5",3,1);
+	    Passanger p6 = new Passanger("p6",5,1);
+	    passangerList.add(p1);
+	    passangerList.add(p2);
+	    passangerList.add(p3);
+	    passangerList.add(p4);
+	    passangerList.add(p5);
+	    passangerList.add(p6);
+	    
+        for(Passanger p: embark(passangerList)){
+	        System.out.println(p.name);
+	    }
+	    
+	    for(Passanger p: disembark(passangerList)){
+	        System.out.println(p.name);
+	    }
+	    
+	    
+	}
+	
+	static ArrayList<Passanger> embark(ArrayList<Passanger> passangerList){
+	    ArrayList<Passanger> embarkList = new ArrayList<Passanger>();
+	    ArrayList<Passanger> tmp = new ArrayList<Passanger>();
+	    
+	    for(Passanger p: passangerList){
+	        if(p.dest>=p.orig){
+	            embarkList.add(p);
+	        }
+	        Collections.sort(embarkList,(p1, p2) -> p1.orig - p2.orig);
+	       
+	       if(p.orig>p.dest){
+	           tmp.add(p);
+	       }
+            Collections.sort(tmp,(p1, p2) -> p2.orig - p1.orig);
+	    }
+	    
+	    for(Passanger t: tmp){
+	        embarkList.add(t);
+	    }
+	    
+	    return embarkList;
+	}
+	
+	static ArrayList<Passanger> disembark(ArrayList<Passanger> passangerList){
+	    ArrayList<Passanger> disembarkList = new ArrayList<Passanger>();
+	    ArrayList<Passanger> tmp = new ArrayList<Passanger>();
+	    
+	    for(Passanger p: passangerList){
+	        if(p.dest>=p.orig){
+	            disembarkList.add(p);
+	        }
+	        Collections.sort(disembarkList,(p1, p2) -> p1.dest - p2.dest);
+	       
+	       if(p.orig>p.dest){
+	           tmp.add(p);
+	       }
+            Collections.sort(tmp,(p1, p2) -> p2.dest - p1.dest);
+	    }
+	    
+	    for(Passanger t: tmp){
+	        disembarkList.add(t);
+	    }
+	    
+	    return disembarkList;
+	}
+	
+
+}
+
+class Passanger{
+    String name;
+    int orig;
+    int dest;
+    
+    public Passanger(String name, int orig, int dest){
+        this.name = name;
+        this.orig = orig;
+        this.dest = dest;
+    }
+}
+
+ 

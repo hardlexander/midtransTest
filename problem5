@@ -1,0 +1,56 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class problem5 {
+	public static void main (String[] args) {
+		Bus b1 = new Bus("Bus 1", "10:00", "10:05");
+		Bus b2 = new Bus("Bus 2", "10:05", "10:15");
+		Bus b3 = new Bus("Bus 3", "10:10", "10:30");
+		Bus b4 = new Bus("Bus 4", "10:20", "10:40");
+		Bus b5 = new Bus("Bus 5", "10:45", "10:50");
+		ArrayList<Bus> busList = new ArrayList<Bus>();
+		busList.add(b1);
+		busList.add(b2);
+		busList.add(b3);
+		busList.add(b4);
+		busList.add(b5);
+		
+		System.out.println(maxBus(busList));
+	}
+	
+	static int maxBus(ArrayList<Bus> busList){
+	    int max = 0;
+	    int tmp = 0;
+	    for(int i=0; i<busList.size()-1; i++){
+	        for(int j=i+1; j<busList.size(); j++){
+	            if(overlap(busList.get(j), busList.get(i))){
+	                tmp++;
+	            }
+	        max = tmp>max?tmp:max;
+	        tmp = 0;
+	        }
+	    }
+	    return max;
+	}
+	
+	static boolean overlap(Bus b1, Bus b2){
+	   if(b2.departure.compareTo(b1.arrival)<=0){
+	       return true;
+	   }
+	   return false; 
+	}
+}
+
+class Bus{
+    String name;
+    String arrival;
+    String departure;
+    
+    public Bus(String name, String arrival, String departure){
+        this.name = name;
+        this. arrival = arrival;
+        this.departure = departure;
+    }
+}
